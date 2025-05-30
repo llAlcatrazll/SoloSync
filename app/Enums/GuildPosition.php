@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum GuildPosition: string
 {
-    case Leader = 'Guild Owner';
-    case ViceLeader = 'Guild Co-Owner';
-    case Member = 'Just a regular dude';
+    case Leader = 'Leader';
+    case ViceLeader = 'ViceLeader';
+    case Member = 'Member';
 
     public function getDescription(): ?string
     {
@@ -14,6 +14,15 @@ enum GuildPosition: string
             self::Leader => 'Ownver of the Guild',
             self::ViceLeader => 'Co-Owner of the Guild with limited previlegas',
             self::Member => 'Just a peasant',
+        };
+    }
+
+    public function getColor(): ?string
+    {
+        return match ($this) {
+            self::Leader => 'danger',
+            self::ViceLeader => 'info',
+            self::Member => 'success',
         };
     }
 

@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('username');
-            $table->string('guild_attribution');
+            $table->string('username')->nullable();
+            $table->string('guild_attribution')->nullable();
             $table->string('role')->default('member');
-            $table->string('battle_tier');
-            $table->string('permission');
-            $table->string('status');
+            $table->string('battle_tier')->nullable();
+            $table->string('permission')->default('none');
+            $table->string('status')->default('active');
             // $table->string('avatar');
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Gunhee;
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -11,6 +12,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentView;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -19,6 +21,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+// https://filamentexamples.com/tutorial/render-hooks-cheat-sheet
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -27,6 +30,8 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->defaultThemeMode(ThemeMode::Dark)
+            ->brandName('SoloSync')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
@@ -57,4 +62,12 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ]);
     }
+
+    // public function boot(): void
+    // {
+    //     FilamentView::registerRenderHook(
+    //         'filament.resources.gunhee-resource.index.start',
+    //         fn() => view('filament.resources.gunhee-resource.widgets.add-new-member')->render()
+    //     );
+    // }
 }

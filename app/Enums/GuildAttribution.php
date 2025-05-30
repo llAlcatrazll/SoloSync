@@ -4,23 +4,23 @@ namespace App\Enums;
 
 enum GuildAttribution: string
 {
-    case Gunhee = 'Guild Owner';
-    case GunheeAlt = 'Guild Co-Owner';
-    case Ðragons = 'Slackers';
-    case GunheeMini = 'Non-Existant';
-    case SoloXSlayer = 'solo slayer';
-    case Superb = 'superbious';
-    case RNG = 'rng guy';
+    case Gunhee = 'Gunhee';
+    case GunheeAlt = 'GunheeAlt';
+    case Ðragons = 'Ðragons';
+    case GunheeMini = 'GunheeMini';
+    case SoloXSlayer = 'SoloXSlayer';
+    case Superb = 'Superb';
+    case RNG = 'RNG';
 
     public function getDescription(): ?string
     {
         return match ($this) {
-            self::Gunhee => 'Ownver of the Guild',
-            self::GunheeAlt => 'Co-Owner of the Guild with limited previlegas',
-            self::Ðragons => 'Just a peasant',
-            self::GunheeMini => 'Just a peasant',
-            self::SoloXSlayer => 'Just a peasant',
-            self::Superb => 'Just a peasant',
+            self::Gunhee => 'Owner of the Guild',
+            self::GunheeAlt => 'Co-Owner of the Guild with limited privileges',
+            self::Ðragons,
+            self::GunheeMini,
+            self::SoloXSlayer,
+            self::Superb,
             self::RNG => 'Just a peasant',
         };
     }
@@ -28,7 +28,7 @@ enum GuildAttribution: string
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::Gunhee => 'heroicon-c-check-badge',
+            self::Gunhee => 'mdi-mustache',
             self::GunheeAlt => 'phosphor-eyeglasses-fill',
             self::Ðragons => 'fas-dragon',
             self::GunheeMini => 'ri-sword-fill',
@@ -38,21 +38,30 @@ enum GuildAttribution: string
         };
     }
 
+    public function getColor(): ?string
+    {
+        return match ($this) {
+            self::Gunhee => 'Gunhee',
+            self::GunheeAlt => 'GunheeAlt',
+            self::Ðragons => 'Dragons',
+            self::GunheeMini => 'GunheeMini',
+            self::SoloXSlayer => 'SoloXSlayer',
+            self::Superb => 'Superb',
+            self::RNG => 'RNG',
+        };
+    }
+
     public static function IconOptions(): array
     {
-        return collect(self::cases())->mapWithKeys(function ($case) {
-            return [
-                $case->value => $case->value.' - '.$case->getIcon(),
-            ];
-        })->toArray();
+        return collect(self::cases())->mapWithKeys(fn ($case) => [
+            $case->value => $case->value.' - '.$case->getIcon(),
+        ])->toArray();
     }
 
     public static function options(): array
     {
-        return collect(self::cases())->mapWithKeys(function ($case) {
-            return [
-                $case->value => $case->value.' - '.$case->getDescription(),
-            ];
-        })->toArray();
+        return collect(self::cases())->mapWithKeys(fn ($case) => [
+            $case->value => $case->value.' - '.$case->getDescription(),
+        ])->toArray();
     }
 }
