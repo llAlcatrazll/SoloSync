@@ -6,7 +6,7 @@ enum GuildAttribution: string
 {
     case Gunhee = 'Gunhee';
     case GunheeAlt = 'GunheeAlt';
-    case Ðragons = 'Ðragons';
+    case Dragons = 'Dragons';
     case GunheeMini = 'GunheeMini';
     case SoloXSlayer = 'SoloXSlayer';
     case Superb = 'Superb';
@@ -17,7 +17,7 @@ enum GuildAttribution: string
         return match ($this) {
             self::Gunhee => 'Owner of the Guild',
             self::GunheeAlt => 'Co-Owner of the Guild with limited privileges',
-            self::Ðragons,
+            self::Dragons,
             self::GunheeMini,
             self::SoloXSlayer,
             self::Superb,
@@ -30,7 +30,7 @@ enum GuildAttribution: string
         return match ($this) {
             self::Gunhee => 'mdi-mustache',
             self::GunheeAlt => 'phosphor-eyeglasses-fill',
-            self::Ðragons => 'fas-dragon',
+            self::Dragons => 'fas-dragon',
             self::GunheeMini => 'ri-sword-fill',
             self::SoloXSlayer => 'rpg-daggers',
             self::Superb => 'rpg-cat',
@@ -43,7 +43,7 @@ enum GuildAttribution: string
         return match ($this) {
             self::Gunhee => 'Gunhee',
             self::GunheeAlt => 'GunheeAlt',
-            self::Ðragons => 'Dragons',
+            self::Dragons => 'Dragons',
             self::GunheeMini => 'GunheeMini',
             self::SoloXSlayer => 'SoloXSlayer',
             self::Superb => 'Superb',

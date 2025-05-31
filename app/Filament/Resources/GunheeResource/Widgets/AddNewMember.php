@@ -61,6 +61,7 @@ class AddNewMember extends Widget implements HasForms
 
                     TextInput::make('battle_tier')
                         ->columnSpan(2)
+                        ->maxLength(2)
                         ->placeholder('45'),
 
                     Actions::make([

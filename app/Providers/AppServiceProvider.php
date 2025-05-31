@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
         FilamentView::registerRenderHook(
             PanelsRenderHook::SIDEBAR_FOOTER,
-            fn(): View => view('footer'),
+            fn (): View => view('footer'),
         );
         // FilamentView::registerRenderHook(
         //     PanelsRenderHook::SIDEBAR_NAV_START,
@@ -60,7 +60,7 @@ class AppServiceProvider extends ServiceProvider
         $breadcrumbs = [];
 
         foreach ($segments as $segment) {
-            $accumulatedPath .= '/' . $segment;
+            $accumulatedPath .= '/'.$segment;
             $breadcrumbs[] = [
                 'label' => ucfirst($segment),
                 'url' => url($accumulatedPath),

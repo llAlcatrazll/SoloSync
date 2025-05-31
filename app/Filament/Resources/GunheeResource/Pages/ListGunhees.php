@@ -33,9 +33,9 @@ class ListGunhees extends ListRecords
             Tab::make('GunheeAlt')
                 ->badgeColor('info')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::GunheeAlt)),
-            Tab::make('Ðragons')
+            Tab::make('Dragons')
                 ->badgeColor('Dragons')
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::Ðragons)),
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::Dragons)),
             Tab::make('GunheeMini')
                 ->badgeColor('info')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::GunheeMini)),
@@ -57,11 +57,6 @@ class ListGunhees extends ListRecords
         return [
             GunheeResource\Widgets\AddNewMember::class,
         ];
-    }
-
-    public function getBreadcrumbs(): array
-    {
-        return [];
     }
 
     public function getTitle(): string
