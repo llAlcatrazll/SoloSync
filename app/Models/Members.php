@@ -20,4 +20,9 @@ class Members extends Model
         // 'contribution',
         // 'rage_count',
     ];
+
+    public function contributions()
+    {
+        return $this->hasMany(Contribution::class, 'member_id');
+    }
 }

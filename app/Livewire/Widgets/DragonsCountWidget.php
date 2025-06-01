@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Widgets;
 
+use App\Enums\Status;
 use App\Models\Members;
 use Livewire\Component;
 
@@ -11,7 +12,10 @@ class DragonsCountWidget extends Component
 
     public function mount()
     {
-        $count = Members::where('guild_attribution', 'Dragons')->count();
+        $count = Members::where('guild_attribution', 'Dragons')
+            ->where('status', Status::Active)
+            ->count();
+
         $this->stats = [
             [
                 'label' => 'Active Members',

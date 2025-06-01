@@ -14,15 +14,19 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Support\Facades\FilamentView;
+use Filament\Tables\View\TablesRenderHook;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 // https://filamentexamples.com/tutorial/render-hooks-cheat-sheet
+// https://filamentphp.com/api/3.x/Filament/Tables/Table.html
+// MORE DETAILED DOCUMENTATION OF FILAMENT
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -71,8 +75,9 @@ class AdminPanelProvider extends PanelProvider
     // public function boot(): void
     // {
     //     FilamentView::registerRenderHook(
-    //         'filament.resources.gunhee-resource.index.start',
-    //         fn() => view('filament.resources.gunhee-resource.widgets.add-new-member')->render()
+    //         TablesRenderHook::TOOLBAR_REORDER_TRIGGER_AFTER,
+    //         fn (): string => Blade::render('@livewire("log-dragons")'),
     //     );
     // }
 }
+// TablesRenderHook::TOOLBAR_REORDER_TRIGGER_AFTER,

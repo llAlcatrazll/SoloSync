@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -48,20 +47,29 @@ class DragonsListResource extends Resource
                 TextColumn::make('role')
                     ->columnSpan(1)
                     ->badge()
-                    ->sortable()
+                    ->sortable(
+                        query: fn (Builder $query, string $direction) => $query->orderByRaw("
+                                CASE
+                                    WHEN role = 'Leader' THEN 1
+                                    WHEN role = 'ViceLeader' THEN 2
+                                    WHEN role = 'Member' THEN 3
+                                    ELSE 4
+                                END $direction
+                            ")
+                    )
                     ->searchable()
                     ->color(fn ($state) => GuildPosition::from($state)->getColor()),
                 TextColumn::make('battle_tier')
+                    ->default('1')
                     ->alignment(Alignment::Center)
                     ->columnSpan(1)
                     ->sortable(),
-                TextInputColumn::make('Contribution')
-                    ->placeholder('38'),
-                // TextColumn::make('Prev Contribution'),
-                TextInputColumn::make('Rage Count')
-                    ->placeholder('40'),
-                // TextColumn::make('Prev Rage Count'),
+                TextColumn::make('Contribution')
+                    ->default('0'),
+                TextColumn::make('Rage Count')
+                    ->default('0'),
             ])
+            ->persistSortInSession()
             ->filters([
                 //
             ])

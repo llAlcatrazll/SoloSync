@@ -17,11 +17,7 @@ return new class extends Migration
             $table->integer('contribution')->nullable();
             $table->integer('rage_count')->nullable();
             $table->integer('week_count')->default(now());
-            $table->foreignId('id')->nullable();
-            //    'contribution',
-            // 'rage_count',
-            // 'week_count',
-            // 'id',
+            $table->foreignId('member_id')->nullable();
         });
     }
 

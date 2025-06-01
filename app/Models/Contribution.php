@@ -14,6 +14,11 @@ class Contribution extends Model
         'contribution',
         'rage_count',
         'week_count',
-        'id',
+        'member_id',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Members::class, 'member_id');
+    }
 }

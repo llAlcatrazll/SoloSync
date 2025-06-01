@@ -22,9 +22,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 // https://filamentexamples.com/tutorial/render-hooks-cheat-sheet
+// https://laraveldaily.com/post/filament-add-form-on-top-above-the-table
 class GunheeResource extends Resource
 {
-    // https://laraveldaily.com/post/filament-add-form-on-top-above-the-table
     protected static ?string $model = Members::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
