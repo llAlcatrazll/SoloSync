@@ -36,7 +36,7 @@ class DragonsListResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::Dragons)->where('status', Status::Active))
-            ->defaultPaginationPageOption(50)
+            ->defaultPaginationPageOption(25)
             ->columns([
                 TextColumn::make('username')
                     ->columnSpan(2)
