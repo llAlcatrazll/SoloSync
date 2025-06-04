@@ -21,4 +21,9 @@ class Contribution extends Model
     {
         return $this->belongsTo(Members::class, 'member_id');
     }
+
+    public function latestContribution()
+    {
+        return $this->hasOne(Contribution::class, 'member_id')->latestOfMany();
+    }
 }

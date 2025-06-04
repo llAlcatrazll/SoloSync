@@ -4,8 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Enums\GuildAttribution;
 use App\Enums\GuildPosition;
+use App\Enums\Status;
 use App\Filament\Resources\DragonsListResource\Pages;
+use App\Models\Contribution;
 use App\Models\Members;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
@@ -25,14 +28,14 @@ class DragonsListResource extends Resource
         return $form
             ->schema([
                 //
+                TextInput::make('battle_tier'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::Dragons))
-
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('guild_attribution', GuildAttribution::Dragons)->where('status', Status::Active))
             ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('username')
@@ -65,16 +68,24 @@ class DragonsListResource extends Resource
                     ->columnSpan(1)
                     ->sortable(),
                 TextColumn::make('Contribution')
-                    ->default('0'),
+                    ->getStateUsing(function ($record) {
+                        $contribution = Contribution::where('member_id', $record->id)->latest()->first();
+
+                        return $contribution?->contribution ?? '0';
+                    }),
                 TextColumn::make('Rage Count')
-                    ->default('0'),
+                    ->getStateUsing(function ($record) {
+                        $contribution = Contribution::where('member_id', $record->id)->latest()->first();
+
+                        return $contribution?->rage_count ?? '0';
+                    }),
             ])
             ->persistSortInSession()
             ->filters([
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
